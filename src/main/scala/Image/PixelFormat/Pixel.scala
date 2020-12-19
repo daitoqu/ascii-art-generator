@@ -3,11 +3,11 @@ package Image.PixelFormat
 class Pixel
 {
   var luminance: Int = 0
-  def this(packetPixel: Int) = {
+  def this(packetRGB: Int) = {
     this()
-    val red = (packetPixel & 0xFF0000) >> 16
-    val green = (packetPixel & 0xFF00) >> 8
-    val blue = packetPixel & 0xFF
+    val red = (packetRGB & 0xFF0000) >> 16
+    val green = (packetRGB & 0xFF00) >> 8
+    val blue = packetRGB & 0xFF
     luminance = ((0.3 * red) + (0.59 * green) + (0.11 * blue)).toInt
     luminance = 255 - luminance
     this.clamp()

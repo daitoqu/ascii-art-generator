@@ -18,7 +18,7 @@ class FileImageLoader(filePath: String) extends ImageLoader {
     for (y <- 0 until dimY) {
       var pixelLine = ArrayBuffer[Pixel]()
       for (x <- 0 until dimX) {
-        pixelLine.addOne(new Pixel(packetPixel = img.getRGB(x, y)))
+        pixelLine.addOne(new Pixel(packetRGB = img.getRGB(x, y)))
       }
       pixel2DArray.addOne(pixelLine.toArray)
     }

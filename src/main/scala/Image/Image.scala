@@ -1,14 +1,16 @@
 package Image
 
-import Image.ImageTransform.{Flipable, Rotatable, Scalable}
+import Image.ImageTransform.{Deg180, Deg270, Deg90, Flipable, HalfRes, Rotatable, RotationFactor, Scalable, ScalingFactor, TwiceRes}
 import Image.PixelFilter.PixelFilter
 import Image.PixelFormat.Pixel
 
+import scala.collection.mutable.ArrayBuffer
+
 class Image(
-                  val dimX: Int,
-                  val dimY: Int,
+                  var dimX: Int,
+                  var dimY: Int,
                   var pixelArray: Array[Array[Pixel]]
-                )
+                ) extends Scalable with Rotatable
 {
   def ApplyFilter(pixelFilter: PixelFilter): Unit = {
     for (y <- 0 until dimY) {
@@ -16,5 +18,80 @@ class Image(
         pixelFilter.apply(pixelArray(y)(x))
       }
     }
+  }
+
+  def Rotate(rotationFactor: RotationFactor): Unit = {
+    rotationFactor match {
+      case Deg90 => this.Rotate90Deg()
+      case Deg180 => {
+        this.Rotate90Deg()
+        this.Rotate90Deg()
+      }
+      case Deg270 => {
+        this.Rotate90Deg()
+        this.Rotate90Deg()
+        this.Rotate90Deg()
+      }
+    }
+  }
+
+  def Scale(factor: ScalingFactor): Unit = {
+    factor match {
+      case HalfRes => this.ScaleHalfRes()
+      case TwiceRes => this.ScaleTwiceRes()
+    }
+  }
+
+  private def Rotate90Deg(): Unit = {
+    var pixel2DArray = ArrayBuffer[Array[Pixel]]()
+    for (x <- 0 until dimX) {
+      var pixelLine = ArrayBuffer[Pixel]()
+      for (y <- 0 until dimY) {
+        pixelLine.addOne(pixelArray(dimY - 1 - y)(x))
+      }
+      pixel2DArray.addOne(pixelLine.toArray)
+    }
+    val oldX = dimX
+    val oldY = dimY
+    dimX = oldY
+    dimY = oldX
+    pixelArray = pixel2DArray.toArray
+  }
+
+  private def ScaleTwiceRes(): Unit = {
+    var pixel2DArray = ArrayBuffer[Array[Pixel]]()
+    for (y <- 0 until dimY) {
+      var pixelLine = ArrayBuffer[Pixel]()
+      for (x <- 0 until dimX) {
+        pixelLine.addOne(pixelArray(y)(x))
+        pixelLine.addOne(pixelArray(y)(x))
+      }
+      pixel2DArray.addOne(pixelLine.toArray)
+      pixel2DArray.addOne(pixelLine.toArray)
+    }
+    dimX *= 2
+    dimY *= 2
+    pixelArray = pixel2DArray.toArray
+  }
+
+  private def ScaleHalfRes(): Unit = {
+    var pixel2DArray = ArrayBuffer[Array[Pixel]]()
+    for (y <- 0 until dimY/2) {
+      var pixelLine = ArrayBuffer[Pixel]()
+      for (x <- 0 until dimX/2) {
+        var accum: Int = pixelArray(2*y    )(2*x    ).luminance
+        accum +=         pixelArray(2*y + 1)(2*x    ).luminance
+        accum +=         pixelArray(2*y    )(2*x + 1).luminance
+        accum +=         pixelArray(2*y + 1)(2*x + 1).luminance
+        accum /= 4
+        var pixel = new Pixel(0)
+        pixel.luminance = accum
+        pixelLine.addOne(pixel)
+      }
+      pixel2DArray.addOne(pixelLine.toArray)
+    }
+    dimX /= 2
+    dimY /= 2
+    pixelArray = pixel2DArray.toArray
   }
 }
