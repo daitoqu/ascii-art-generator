@@ -1,12 +1,12 @@
 package Main
 
 import Image.ImageLoader.FileImageLoader
+import Image.TextOutput.FileTextOutput
+import Image.Image
 
 object Main extends App {
-  var fileLoader = new FileImageLoader("test.jpg")
-  val img = fileLoader.LoadImage()
-  println(img.dimX)
-  println(img.dimY)
+  val ImageLoader = new FileImageLoader("test.png")
+  val img = ImageLoader.LoadImage()
 }
 
 object Foos {
