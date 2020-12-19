@@ -1,6 +1,6 @@
 package Image
 
-import Image.ImageTransform.{Deg180, Deg270, Deg90, Flipable, HalfRes, Rotatable, RotationFactor, Scalable, ScalingFactor, TwiceRes}
+import Image.ImageTransform.{AxisFlip, Deg180, Deg270, Deg90, Flipable, HalfRes, Rotatable, RotationFactor, Scalable, ScalingFactor, TwiceRes, XFlip, YFlip}
 import Image.PixelFilter.PixelFilter
 import Image.PixelFormat.Pixel
 
@@ -10,7 +10,7 @@ class Image(
                   var dimX: Int,
                   var dimY: Int,
                   var pixelArray: Array[Array[Pixel]]
-                ) extends Scalable with Rotatable
+                ) extends Scalable with Rotatable with Flipable
 {
   def ApplyFilter(pixelFilter: PixelFilter): Unit = {
     for (y <- 0 until dimY) {
@@ -40,6 +40,37 @@ class Image(
       case HalfRes => this.ScaleHalfRes()
       case TwiceRes => this.ScaleTwiceRes()
     }
+  }
+
+  def Flip(axisFlip: AxisFlip): Unit = {
+    axisFlip match {
+      case XFlip => this.FlipX()
+      case YFlip => this.FlipY()
+    }
+  }
+
+  private def FlipX(): Unit = {
+    var pixel2DArray = ArrayBuffer[Array[Pixel]]()
+    for (y <- 0 until dimY) {
+      var pixelLine = ArrayBuffer[Pixel]()
+      for (x <- 0 until dimX) {
+        pixelLine.addOne(pixelArray(dimY - 1 - y)(x))
+      }
+      pixel2DArray.addOne(pixelLine.toArray)
+    }
+    pixelArray = pixel2DArray.toArray
+  }
+
+  private def FlipY(): Unit = {
+    var pixel2DArray = ArrayBuffer[Array[Pixel]]()
+    for (y <- 0 until dimY) {
+      var pixelLine = ArrayBuffer[Pixel]()
+      for (x <- 0 until dimX) {
+        pixelLine.addOne(pixelArray(y)(dimX - 1 - x))
+      }
+      pixel2DArray.addOne(pixelLine.toArray)
+    }
+    pixelArray = pixel2DArray.toArray
   }
 
   private def Rotate90Deg(): Unit = {
