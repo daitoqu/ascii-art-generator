@@ -5,10 +5,11 @@ class Pixel
   var luminance: Int = 0
   def this(packetPixel: Int) = {
     this()
-    val red = packetPixel >> 16 & 0xFF
-    val green = packetPixel >> 8 & 0xFF
+    val red = (packetPixel & 0xFF0000) >> 16
+    val green = (packetPixel & 0xFF00) >> 8
     val blue = packetPixel & 0xFF
     luminance = ((0.3 * red) + (0.59 * green) + (0.11 * blue)).toInt
+    luminance = 255 - luminance
     this.clamp()
   }
 

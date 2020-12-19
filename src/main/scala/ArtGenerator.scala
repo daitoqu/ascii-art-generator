@@ -1,3 +1,4 @@
+package Main
 import Image.Image
 
 class ArtGenerator(palette: String = " .:-=+*#%@") {
@@ -5,7 +6,9 @@ class ArtGenerator(palette: String = " .:-=+*#%@") {
     var ASCIIArt: String = ""
     for (y <- 0 until srcImage.dimY) {
       for (x <- 0 until srcImage.dimX) {
-        ASCIIArt += palette(srcImage.pixelArray(y)(x).luminance % palette.length)
+        val discErr: Double = 255.0 / (palette.length - 1)
+        val charId: Int = (srcImage.pixelArray(y)(x).luminance / discErr).toInt
+        ASCIIArt += palette(charId)
       }
       ASCIIArt += "\r\n"
     }
