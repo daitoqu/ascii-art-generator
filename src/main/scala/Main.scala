@@ -16,13 +16,22 @@ object Main extends App {
     def isSwitch(s : String) = (s(0) == '-')
     list match {
       case Nil => map
-      case "--max-size" :: value :: tail =>
-        nextOption(map ++ Map('maxsize -> value.toInt), tail)
-      case "--min-size" :: value :: tail =>
-        nextOption(map ++ Map('minsize -> value.toInt), tail)
-      case string :: opt2 :: tail if isSwitch(opt2) =>
-        nextOption(map ++ Map('infile -> string), list.tail)
-      case string :: Nil =>  nextOption(map ++ Map('infile -> string), list.tail)
+      case "--image" :: path :: tail =>
+        nextOption(map ++ Map('image -> path), tail)
+      case "--rotate" :: value :: tail =>
+        nextOption(map ++ Map('rotate -> value.toInt), tail)
+      case "--scale" :: value :: tail =>
+        nextOption(map ++ Map('scale -> value.toDouble), tail)
+      case "--invert" :: tail =>
+        nextOption(map ++ Map('invert -> 1), tail)
+      case "--brightness" :: value :: tail =>
+        nextOption(map ++ Map('brightness -> value.toInt), tail)
+      case "--flip" :: axis :: tail =>
+        nextOption(map ++ Map('flip -> axis), tail)
+      case "--output-console" :: tail =>
+        nextOption(map ++ Map('outputconsole -> 1), tail)
+      case "--output-file" :: path :: tail =>
+        nextOption(map ++ Map('outputfile -> path), tail)
       case option :: tail => println("Unknown option "+option)
         exit(1)
     }
