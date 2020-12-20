@@ -1,4 +1,4 @@
-package Image.TextOutput
+package TextOutput
 
 import java.io.{BufferedWriter, File, FileWriter}
 

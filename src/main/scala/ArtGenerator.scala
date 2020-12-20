@@ -7,7 +7,7 @@ class ArtGenerator(palette: String = " .:-=+*#%@") {
     for (y <- 0 until srcImage.dimY) {
       for (x <- 0 until srcImage.dimX) {
         val discErr: Double = 255.0 / (palette.length - 1)
-        val charId: Int = (srcImage.pixelArray(y)(x).luminance / discErr).toInt
+        val charId: Int = (srcImage.GetPixel(y)(x).luma / discErr).toInt
         ASCIIArt += palette(charId)
       }
       ASCIIArt += "\r\n"
