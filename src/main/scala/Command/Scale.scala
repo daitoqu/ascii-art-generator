@@ -11,8 +11,7 @@ class Scale(amount: Double) extends Command {
       case 0.25 => target.Scale(HalfRes)
       case 1 => {}
       case _ => {
-        println("Invalid scaling factor")
-        exit(1)
+        throw new Exception("Invalid scaling factor")
       }
     }
   }
