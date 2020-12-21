@@ -13,7 +13,7 @@ class StandartFileLoaderTests extends FunSuite {
     try {
       val img = loader.LoadImage()
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "Non-supported file format.")
   }
@@ -24,7 +24,7 @@ class StandartFileLoaderTests extends FunSuite {
     try {
       val img = loader.LoadImage()
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "Can't read input file!")
   }

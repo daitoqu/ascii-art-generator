@@ -51,7 +51,7 @@ class CommandParserTests extends FunSuite {
     try {
       val (loader2, commands) = CommandParser.parse(textArgs)
     } catch {
-      case e => err = e.getMessage
+      case e : Throwable => err = e.getMessage
     }
 
     assert(err == "Unsupported file format.")

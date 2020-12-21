@@ -12,7 +12,7 @@ class ScaleCommandTest extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "")
   }
@@ -25,7 +25,7 @@ class ScaleCommandTest extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "")
   }
@@ -38,7 +38,7 @@ class ScaleCommandTest extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "")
   }
@@ -51,7 +51,7 @@ class ScaleCommandTest extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "Invalid scaling factor")
   }

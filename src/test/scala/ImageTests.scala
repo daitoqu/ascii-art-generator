@@ -50,7 +50,7 @@ class ImageTests extends FunSuite {
     try {
       var img = new Image(4, 2, pixelArray.toArray)
     } catch {
-      case a => msg = a.getMessage
+      case a : Throwable => msg = a.getMessage
     }
     assert(msg == "Pixel array has wrong X dimension.")
   }
@@ -72,7 +72,7 @@ class ImageTests extends FunSuite {
     try {
       var img = new Image(4, 2, pixelArray.toArray)
     } catch {
-      case a => msg = a.getMessage
+      case a : Throwable => msg = a.getMessage
     }
     assert(msg == "Pixel array has wrong Y dimension.")
   }
@@ -83,7 +83,7 @@ class ImageTests extends FunSuite {
     try {
       var img = new Image(0, 2, pixelArray.toArray)
     } catch {
-      case a => msg = a.getMessage
+      case a : Throwable => msg = a.getMessage
     }
     assert(msg == "Unsupported resolution.")
   }
@@ -94,7 +94,7 @@ class ImageTests extends FunSuite {
     try {
       var img = new Image(4, 0, pixelArray.toArray)
     } catch {
-      case a => msg = a.getMessage
+      case a : Throwable => msg = a.getMessage
     }
     assert(msg == "Unsupported resolution.")
   }
@@ -105,7 +105,7 @@ class ImageTests extends FunSuite {
     try {
       var img = new Image(0, 0, pixelArray.toArray)
     } catch {
-      case a => msg = a.getMessage
+      case a : Throwable => msg = a.getMessage
     }
     assert(msg == "Unsupported resolution.")
   }

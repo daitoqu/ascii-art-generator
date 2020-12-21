@@ -13,7 +13,7 @@ class FlipCommandTests extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "")
   }
@@ -26,7 +26,7 @@ class FlipCommandTests extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "")
   }
@@ -39,7 +39,7 @@ class FlipCommandTests extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "Invalid axis format")
   }
@@ -52,7 +52,7 @@ class FlipCommandTests extends FunSuite {
     try {
       cmnd.Execute(img)
     } catch {
-      case c => err = c.getMessage
+      case c : Throwable => err = c.getMessage
     }
     assert(err == "Invalid axis")
   }
