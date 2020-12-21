@@ -6,12 +6,35 @@ import Image.PixelFormat.GrayscalePixel
 
 import scala.collection.mutable.ArrayBuffer
 
-class Image(
-                  var dimX: Int,
-                  var dimY: Int,
-                  private var pixelArray: Array[Array[GrayscalePixel]]
-                ) extends Scalable with Rotatable with Flipable
+class Image extends Scalable with Rotatable with Flipable
 {
+  var dimX: Int = 0
+  var dimY: Int = 0
+  private var pixelArray: Array[Array[GrayscalePixel]] = new Array[Array[GrayscalePixel]](0)
+  def this(
+    iDimX: Int,
+    iDimY: Int,
+    iPixelArray: Array[Array[GrayscalePixel]]
+  ) = {
+    this()
+    if (iDimX < 1 || iDimY < 1) {
+      throw new Exception("Unsupported resolution.")
+    }
+    if (iPixelArray.length != iDimY) {
+      throw new Exception("Pixel array has wrong Y dimension.")
+    }
+
+    for (line <- iPixelArray) {
+      if (line.length != iDimX) {
+        throw new Exception("Pixel array has wrong X dimension.")
+      }
+    }
+
+    this.dimX = iDimX
+    this.dimY = iDimY
+    this.pixelArray = iPixelArray
+  }
+
   def ApplyFilter(pixelFilter: GrayscalePixelFilter): Unit = {
     for (y <- 0 until dimY) {
       for (x <- 0 until dimX) {

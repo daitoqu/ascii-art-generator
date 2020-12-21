@@ -18,7 +18,7 @@ class StandartFileLoader(filePath: String) extends ImageLoader {
     for (y <- 0 until dimY) {
       var pixelLine = ArrayBuffer[GrayscalePixel]()
       for (x <- 0 until dimX) {
-        pixelLine.addOne(new GrayscalePixel(packetRGB = img.getRGB(x, y)))
+        pixelLine.addOne(new GrayscalePixel(img.getRGB(x, y)))
       }
       pixel2DArray.addOne(pixelLine.toArray)
     }
