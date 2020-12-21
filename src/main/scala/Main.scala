@@ -17,7 +17,3 @@ object Main extends App {
     cmnd.Execute(image)
   }
 }
-
-object Foos {
-  def Foo() : Boolean = true
-}

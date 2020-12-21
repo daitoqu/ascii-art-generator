@@ -18,6 +18,7 @@ class GrayscalePixel extends Pixel
 
   def luma_=(newLum: Int) = {
     _luminance = newLum
+    this.clamp()
   }
 
   def clamp(): Unit = {
