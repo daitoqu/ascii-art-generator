@@ -1,12 +1,21 @@
 package Main
 
-import Image.ImageLoader.FileImageLoader
+import Command.{Brightness, Command, Flip, Invert, OutputToConsole, OutputToFile, Rotate, Scale}
+import Image.ImageLoader.StandartFileLoader
+import TextOutput.FileTextOutput
+import Image.Image
+import _root_.Image.ImageTransform.{Deg180, Deg270, Deg90, HalfRes, TwiceRes, XFlip, YFlip}
+import _root_.Image.PixelFilter.{GrayscaleBrightness, GrayscaleInverse, GrayscalePixelFilter}
+
+import scala.collection.mutable.ArrayBuffer
+import scala.sys.exit
 
 object Main extends App {
-  var fileLoader = new FileImageLoader("test.jpg")
-  val img = fileLoader.LoadImage()
-  println(img.dimX)
-  println(img.dimY)
+  val (imageLoader, commands) = CommandParser.parse(args.toList)
+  var image = imageLoader.LoadImage()
+  for (cmnd <- commands) {
+    cmnd.Execute(image)
+  }
 }
 
 object Foos {
