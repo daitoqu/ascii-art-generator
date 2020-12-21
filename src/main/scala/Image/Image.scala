@@ -66,6 +66,7 @@ class Image extends Scalable with Rotatable with Flipable
     factor match {
       case HalfRes => this.ScaleHalfRes()
       case TwiceRes => this.ScaleTwiceRes()
+      case _ => throw new Exception("Unknown scaling factor")
     }
   }
 
