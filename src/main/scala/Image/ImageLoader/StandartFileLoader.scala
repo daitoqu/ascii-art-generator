@@ -12,6 +12,8 @@ import scala.collection.mutable.ArrayBuffer
 class StandartFileLoader(filePath: String) extends ImageLoader {
   override def LoadImage(): Image = {
     val img = ImageIO.read(new File(filePath))
+    if (img == null)
+      throw new Exception("Non-supported file format.")
     val dimX = img.getWidth
     val dimY = img.getHeight
     var pixel2DArray = ArrayBuffer[Array[GrayscalePixel]]()

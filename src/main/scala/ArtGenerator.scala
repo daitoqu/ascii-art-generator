@@ -1,7 +1,7 @@
 package Main
 import Image.Image
 
-class ArtGenerator(palette: String = (" .:-=+*#%@").reverse) {
+class ArtGenerator(var palette: String = (" .:-=+*#%@").reverse) {
   def ConvertImage(srcImage: Image): String = {
     var ASCIIArt: String = ""
     for (y <- 0 until srcImage.dimY) {
