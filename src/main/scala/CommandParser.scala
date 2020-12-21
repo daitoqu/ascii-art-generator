@@ -27,7 +27,6 @@ object CommandParser {
       case "--scale" :: value :: tail =>
         parse(commands.addOne(new Scale(value.toDouble)), tail)
       case "--invert" :: tail =>
-
         parse(commands.addOne(new Invert), tail)
       case "--brightness" :: value :: tail =>
         parse(commands.addOne(new Brightness(value.toInt)), tail)
