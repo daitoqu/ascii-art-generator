@@ -13,6 +13,7 @@ class Rotate(amount: Int) extends Command {
       case 90 => target.Rotate(Deg90)
       case 180 => target.Rotate(Deg180)
       case 270 => target.Rotate(Deg270)
+      case 0 => {}
       case _ => {
         throw new Exception("Invalid angle")
       }

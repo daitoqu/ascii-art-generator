@@ -9,7 +9,6 @@ class GrayscalePixel extends Pixel
     val green = (packetRGB & 0xFF00) >> 8
     val blue = packetRGB & 0xFF
     _luminance = ((0.3 * red) + (0.59 * green) + (0.11 * blue)).toInt
-    _luminance = 255 - _luminance
     this.clamp()
   }
 
