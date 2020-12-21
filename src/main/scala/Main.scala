@@ -1,7 +1,7 @@
 package Main
 
 import Command.{Brightness, Command, Flip, Invert, OutputToConsole, OutputToFile, Rotate, Scale}
-import Image.ImageLoader.FileImageLoader
+import Image.ImageLoader.StandartFileLoader
 import TextOutput.FileTextOutput
 import Image.Image
 import _root_.Image.ImageTransform.{Deg180, Deg270, Deg90, HalfRes, TwiceRes, XFlip, YFlip}

@@ -1,12 +1,12 @@
 package Main
 
 import Command.{Brightness, Command, Flip, Invert, OutputToConsole, OutputToFile, Rotate, Scale}
-import Image.ImageLoader.{FileImageLoader, ImageLoader}
+import Image.ImageLoader.{StandartFileLoader, ImageLoader}
 
 import scala.collection.mutable.ArrayBuffer
 
 object CommandParser {
-  var imageLoader = new FileImageLoader("")
+  var imageLoader = new StandartFileLoader("")
   def parse(list: List[String]) : (ImageLoader, ArrayBuffer[Command]) = {
     var commands = new ArrayBuffer[Command]()
     this.parse(commands, list)
@@ -15,7 +15,11 @@ object CommandParser {
     list match {
       case Nil => (imageLoader, commands)
       case "--image" :: path :: tail => {
-        imageLoader = new FileImageLoader(path)
+        val format = path.takeRight(3)
+        format match {
+          case "jpg" | "png" | "gif" => imageLoader = new StandartFileLoader(path)
+          case _ => throw new Exception("Unsupported file format.")
+        }
         parse(commands, tail)
       }
       case "--rotate" :: value :: tail =>

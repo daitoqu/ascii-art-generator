@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage
 import scala.:+
 import scala.collection.mutable.ArrayBuffer
 
-class FileImageLoader(filePath: String) extends ImageLoader {
+class StandartFileLoader(filePath: String) extends ImageLoader {
   override def LoadImage(): Image = {
     val img = ImageIO.read(new File(filePath))
     val dimX = img.getWidth
