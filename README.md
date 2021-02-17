@@ -1,4 +1,4 @@
-# ASCII Art
+# ASCII Art Generator
 
 [![pipeline status](https://gitlab.fit.cvut.cz/alekhiva/ascii-art-generator/badges/master/pipeline.svg)](https://gitlab.fit.cvut.cz/alekhiva/ascii-art-generator)
 
