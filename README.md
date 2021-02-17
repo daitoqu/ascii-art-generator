@@ -1,13 +1,34 @@
 # ASCII Art
 
 [![pipeline status](https://gitlab.fit.cvut.cz/alekhiva/ascii-art-generator/badges/master/pipeline.svg)](https://gitlab.fit.cvut.cz/alekhiva/ascii-art-generator)
-[![coverage report](https://gitlab.fit.cvut.cz/alekhiva/ascii-art-generator/badges/master/coverage.svg)](https://gitlab.fit.cvut.cz/alekhiva/ascii-art-generator/commits/master)
 
-The idea of this project is to load images, translate them into ASCII ART images, optionally apply filters, and save them. (https://courses.fit.cvut.cz/BI-OOP/projects/ASCII-art.html)
+![alt text](https://i.imgur.com/WxeADKa.png)
 
-## How to do it
+In this project i use **Scala** programming language to implement loading images and translating them into ASCII Art and, optionally, applying filters.
 
-1. **Read [the instructions](https://courses.fit.cvut.cz/BI-OOP/projects/ASCII-art.html)**
-2. Play [lofi hip hop radio](https://www.youtube.com/watch?v=5qap5aO4i9A)
-3. [???](https://www.youtube.com/watch?v=ZXsQAXx_ao0)
-4. Profit
+Example commands:
+> run --image ../images/test-image.jpg --rotate +90 --scale 0.25 --invert --output-console
+
+> run --image test-image.jpg --output-file ../outputs/output.txt
+
+> run --image test-image.jpg --rotate +89 --invert --rotate +1 --output-file ../outputs/output.txt --output-console 
+
+## Usage
+
+### 1. Loading image
+> --image *image-path*
+
+### 2. Applying filters
+2a. Rotating 
+> --rotate *degree*
+
+2b. Scaling 
+> --scale *amount*
+
+2c. Inverting color
+> --invert
+
+### 3. Outputting result
+> --output-file *file-path*
+
+> --output-console
